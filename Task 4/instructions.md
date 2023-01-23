@@ -7,3 +7,5 @@ The general steps are listed below:
     - Done with "pca.r"
 - Model training and evaluation.
     - Done with "decision-tree.r"
+
+Please note that R codes, but not pure Python codes, are provided here. They are intended to demonstrate the workflow but not to be handed to students directly.
