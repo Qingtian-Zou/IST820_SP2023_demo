@@ -1,5 +1,6 @@
 library(caTools)
 library(caret)
+library(randomForest)
 library(R.utils)
 
 prettySeq <- function(x) paste("Resample", gsub(" ", "0", format(seq(along = x))), sep = "")
@@ -48,25 +49,23 @@ test_set$Y=factor(test_set$Y,c(0,1))
 indices= createRandomDataPartition(training_set$Y, times = 4,p=0.75)
 trCtrl=trainControl(method="cv",number=4,summaryFunction = customSummary, classProbs = FALSE,index = indices,seeds = seeds)
 
-train_DecisionTree=TRUE
+train_RandomForest=TRUE
 print("############################################################")
-if(train_DecisionTree)
+if(train_RandomForest)
 {
-  rpartGrid <- expand.grid(cp = c(1:9)/20)
-  withTimeout(modelP.rpart<- train(training_set[2:(ncol(training_set)%/%5)],training_set$Y,method="rpart",metric = "F1", tuneGrid = rpartGrid,trControl = trCtrl),timeout = 1200,onTimeout = "error")
+  rfGrid <- expand.grid(mtry = c(1:4)*ncol(training_set)%/%20)
+  withTimeout(modelP.rf<- train(training_set[2:(ncol(training_set)%/%5)],training_set$Y,method="rf",metric = "F1",tuneGrid=rfGrid,trControl = trCtrl),timeout = 1200,onTimeout = "error")
   
   print("validation set results:")
-  print(modelP.rpart$results)
-  print(modelP.rpart$bestTune)
+  print(modelP.rf$results)
+  print(modelP.rf$bestTune)
   print("training set results:")
-  pred_train=predict(modelP.rpart,training_set)
+  pred_train=predict(modelP.rf,training_set)
   print(customSummary(data.frame(obs=training_set$Y,pred=pred_train)))
   print("test set results:")
-  pred_test=predict(modelP.rpart,test_set)
+  pred_test=predict(modelP.rf,test_set)
   print(customSummary(data.frame(obs=test_set$Y,pred=pred_test)))
   
-  save(modelP.rpart,file= paste("DT-",k,".Rdata",sep = ""))
-  
-  print("*******************************")
+  save(modelP.rf,file= paste("RF-",k,".Rdata",sep = ""))
 }
-print("Decision tree model done!")
+print("Random forest mode done!")

@@ -22,6 +22,6 @@ This repository contains demonstration codes and data for use in IST 820. The pr
 
 - Task 3: Tune hyper-parameters to improve the performances compared to models in Task 1 and 2.
 
-- Task 4: Train traditional machine learning models for the same problem. In this demonstration, the decision tree model is chosen.
+- Task 4: Train traditional machine learning models for the same problem. In this demonstration, the random forest model is chosen.
 
 Each task is accompanied with instructions in the corresponding folder.
