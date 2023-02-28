@@ -14,7 +14,7 @@ scikit-learn
 
 ## Overview
 
-This repository contains demonstration codes and data for use in IST 820. The problem is to detect DNS cache poisoning attack with deep learning approaches. Data are provided in the "Data" directory, and four example models are provided in the "Model" directory. There exist four tasks:
+This repository contains demonstration codes and data for students to use in IST 820. The problem is to detect DNS cache poisoning attack with deep learning approaches. Data are provided in the "Data" directory, and four example models are provided in the "Model" directory. There exist four tasks:
 
 - Task 1: Load the given models and data, and then evaluate the models' performances.
 
